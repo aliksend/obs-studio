@@ -536,6 +536,10 @@ EXPORT void obs_enum_sources(bool (*enum_proc)(void*, obs_source_t*),
 EXPORT void obs_enum_outputs(bool (*enum_proc)(void*, obs_output_t*),
 		void *param);
 
+/** Enumerates all declared sources */
+EXPORT void obs_enum_all_sources(bool (*enum_proc)(void*, obs_source_t*),
+		void *param);
+
 /** Enumerates encoders */
 EXPORT void obs_enum_encoders(bool (*enum_proc)(void*, obs_encoder_t*),
 		void *param);
@@ -1965,8 +1969,7 @@ EXPORT const char *obs_service_get_output_type(const obs_service_t *service);
 EXPORT void obs_source_frame_init(struct obs_source_frame *frame,
 		enum video_format format, uint32_t width, uint32_t height);
 
-static inline void obs_source_frame_free(struct obs_source_frame *frame)
-{
+static inline void obs_source_frame_free(struct obs_source_frame *frame) {
 	if (frame) {
 		bfree(frame->data[0]);
 		memset(frame, 0, sizeof(*frame));
@@ -1983,8 +1986,7 @@ static inline struct obs_source_frame *obs_source_frame_create(
 	return frame;
 }
 
-static inline void obs_source_frame_destroy(struct obs_source_frame *frame)
-{
+static inline void obs_source_frame_destroy(struct obs_source_frame *frame) {
 	if (frame) {
 		bfree(frame->data[0]);
 		bfree(frame);

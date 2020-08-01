@@ -1345,6 +1345,13 @@ void obs_enum_outputs(bool (*enum_proc)(void*, obs_output_t*), void *param)
 			enum_proc, param);
 }
 
+void obs_enum_all_sources(bool (*enum_proc)(void*, obs_source_t*), void *param)
+{
+	if (!obs) return;
+	obs_enum(&obs->data.first_source, &obs->data.sources_mutex,
+			enum_proc, param);
+}
+
 void obs_enum_encoders(bool (*enum_proc)(void*, obs_encoder_t*), void *param)
 {
 	if (!obs) return;
