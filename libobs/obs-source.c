@@ -3014,6 +3014,10 @@ void obs_source_process_filter_end(obs_source_t *filter, gs_effect_t *effect,
 
 	target       = obs_filter_get_target(filter);
 	parent       = obs_filter_get_parent(filter);
+
+	if (!target || !parent)
+		return;
+
 	parent_flags = parent->info.output_flags;
 
 	if (can_bypass(target, parent, parent_flags, filter->allow_direct)) {
@@ -3037,6 +3041,10 @@ void obs_source_skip_video_filter(obs_source_t *filter)
 
 	target = obs_filter_get_target(filter);
 	parent = obs_filter_get_parent(filter);
+
+	if (!target || !parent)
+		return;
+
 	parent_flags = parent->info.output_flags;
 	custom_draw = (parent_flags & OBS_SOURCE_CUSTOM_DRAW) != 0;
 	async = (parent_flags & OBS_SOURCE_ASYNC) != 0;
