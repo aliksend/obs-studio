@@ -973,6 +973,12 @@ bool obs_transition_fixed(obs_source_t *transition)
 		transition->transition_use_fixed_duration : false;
 }
 
+int obs_transition_fixed_duration(obs_source_t *transition)
+{
+	return transition_valid(transition, "obs_transition_fixed") ?
+		transition->transition_fixed_duration : 0;
+}
+
 static inline obs_source_t *copy_source_state(obs_source_t *tr_dest,
 		obs_source_t *tr_source, size_t idx)
 {
